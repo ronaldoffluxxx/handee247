@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { useToast } from '@/components/ui/Toast';
 import { addListing, getCategories, Listing } from '@/lib/storage';
-import { Camera, MapPin, DollarSign, ArrowLeft } from 'lucide-react';
+import { Camera, MapPin, DollarSign, ArrowLeft, X } from 'lucide-react';
 
 export default function CreateListingPage() {
     const { user, isAuthenticated } = useAuth();
@@ -113,8 +113,8 @@ export default function CreateListingPage() {
                                     type="button"
                                     onClick={() => setFormData({ ...formData, type: 'offer' })}
                                     className={`p-4 rounded-xl border-2 transition-all ${formData.type === 'offer'
-                                            ? 'border-brand-blue bg-blue-50'
-                                            : 'border-gray-200 hover:border-gray-300'
+                                        ? 'border-brand-blue bg-blue-50'
+                                        : 'border-gray-200 hover:border-gray-300'
                                         }`}
                                 >
                                     <div className="text-center">
@@ -127,8 +127,8 @@ export default function CreateListingPage() {
                                     type="button"
                                     onClick={() => setFormData({ ...formData, type: 'request' })}
                                     className={`p-4 rounded-xl border-2 transition-all ${formData.type === 'request'
-                                            ? 'border-brand-blue bg-blue-50'
-                                            : 'border-gray-200 hover:border-gray-300'
+                                        ? 'border-brand-blue bg-blue-50'
+                                        : 'border-gray-200 hover:border-gray-300'
                                         }`}
                                 >
                                     <div className="text-center">

@@ -402,8 +402,9 @@ export function initializeDemoData(): void {
                 userId: 'user_1',
                 title: 'Professional Logo Design',
                 description: 'I will create a unique, professional logo for your business or brand.',
-                category: 'design',
+                category: 'Design',
                 location: 'Remote',
+                price: '$150',
                 type: 'offer',
                 images: [],
                 createdAt: new Date().toISOString(),
@@ -412,11 +413,12 @@ export function initializeDemoData(): void {
             {
                 id: 'listing_2',
                 userId: 'user_2',
-                title: 'Plumbing Help Needed',
-                description: 'Looking for someone to help fix a leaky faucet in my kitchen.',
-                category: 'home-services',
+                title: 'Plumbing Services',
+                description: 'Professional plumbing services for residential and commercial properties.',
+                category: 'Home Services',
                 location: 'New York, NY',
-                type: 'request',
+                price: '$80/hour',
+                type: 'offer',
                 images: [],
                 createdAt: new Date().toISOString(),
                 status: 'active',
@@ -426,8 +428,9 @@ export function initializeDemoData(): void {
                 userId: 'user_3',
                 title: 'React.js Tutoring',
                 description: 'One-on-one React tutoring sessions for beginners to advanced developers.',
-                category: 'development',
+                category: 'Development',
                 location: 'Remote',
+                price: '$60/hour',
                 type: 'offer',
                 images: [],
                 createdAt: new Date().toISOString(),
@@ -436,5 +439,120 @@ export function initializeDemoData(): void {
         ];
 
         demoListings.forEach(addListing);
+
+        // Create demo deals (so users can see active deals and chat)
+        const demoDeals: Deal[] = [
+            {
+                id: 'deal_1',
+                listingId: 'listing_1',
+                proposerId: 'user_2', // Mike proposing to Sarah
+                receiverId: 'user_1',
+                status: 'accepted',
+                message: 'Hi Sarah! I need a logo for my plumbing business. Can we discuss the details?',
+                createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(), // 2 days ago
+                updatedAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(), // 1 day ago
+            },
+            {
+                id: 'deal_2',
+                listingId: 'listing_3',
+                proposerId: 'user_1', // Sarah proposing to Alex
+                receiverId: 'user_3',
+                status: 'in_progress',
+                message: 'I would love to learn React! When can we start?',
+                createdAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(), // 3 days ago
+                updatedAt: new Date(Date.now() - 12 * 60 * 60 * 1000).toISOString(), // 12 hours ago
+            },
+        ];
+
+        demoDeals.forEach(addDeal);
+
+        // Create demo messages for the deals
+        const demoMessages: Message[] = [
+            // Messages for deal_1 (Mike and Sarah)
+            {
+                id: 'msg_1',
+                dealId: 'deal_1',
+                senderId: 'user_2',
+                receiverId: 'user_1',
+                content: 'Hi Sarah! I need a logo for my plumbing business. Can we discuss the details?',
+                type: 'text',
+                timestamp: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
+                read: true,
+            },
+            {
+                id: 'msg_2',
+                dealId: 'deal_1',
+                senderId: 'user_1',
+                receiverId: 'user_2',
+                content: 'Of course! I\'d love to help. What kind of style are you looking for?',
+                type: 'text',
+                timestamp: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000 + 30 * 60 * 1000).toISOString(),
+                read: true,
+            },
+            {
+                id: 'msg_3',
+                dealId: 'deal_1',
+                senderId: 'user_2',
+                receiverId: 'user_1',
+                content: 'Something professional and modern. Blue and white colors would be great!',
+                type: 'text',
+                timestamp: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000 + 45 * 60 * 1000).toISOString(),
+                read: true,
+            },
+            {
+                id: 'msg_4',
+                dealId: 'deal_1',
+                senderId: 'user_1',
+                receiverId: 'user_2',
+                content: 'Perfect! I\'ll start working on some concepts.',
+                type: 'text',
+                timestamp: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
+                read: true,
+            },
+            // Messages for deal_2 (Sarah and Alex)
+            {
+                id: 'msg_5',
+                dealId: 'deal_2',
+                senderId: 'user_1',
+                receiverId: 'user_3',
+                content: 'I would love to learn React! When can we start?',
+                type: 'text',
+                timestamp: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
+                read: true,
+            },
+            {
+                id: 'msg_6',
+                dealId: 'deal_2',
+                senderId: 'user_3',
+                receiverId: 'user_1',
+                content: 'Great! We can start this week. Do you have any programming experience?',
+                type: 'text',
+                timestamp: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000 + 2 * 60 * 60 * 1000).toISOString(),
+                read: true,
+            },
+            {
+                id: 'msg_7',
+                dealId: 'deal_2',
+                senderId: 'user_1',
+                receiverId: 'user_3',
+                content: 'Yes, I know HTML and CSS. Just getting started with JavaScript.',
+                type: 'text',
+                timestamp: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
+                read: true,
+            },
+            {
+                id: 'msg_8',
+                dealId: 'deal_2',
+                senderId: 'user_3',
+                receiverId: 'user_1',
+                content: 'Voice message',
+                type: 'voice',
+                voiceData: 'demo_voice_data',
+                timestamp: new Date(Date.now() - 12 * 60 * 60 * 1000).toISOString(),
+                read: false,
+            },
+        ];
+
+        demoMessages.forEach(addMessage);
     }
 }
