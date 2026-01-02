@@ -14,7 +14,7 @@ import { Camera, MapPin, Mail, Phone, Edit2, Briefcase, Package } from 'lucide-r
 import Link from 'next/link';
 
 export default function ProfilePage() {
-    const { user, isAuthenticated } = useAuth();
+    const { user, isAuthenticated, loading: authLoading } = useAuth();
     const router = useRouter();
     const toast = useToast();
 
@@ -31,6 +31,9 @@ export default function ProfilePage() {
     const [userListings, setUserListings] = useState<Listing[]>([]);
 
     useEffect(() => {
+        // Wait for auth to load before checking authentication
+        if (authLoading) return;
+
         if (!isAuthenticated) {
             router.push('/login');
             return;
@@ -50,7 +53,8 @@ export default function ProfilePage() {
             const listings = getUserListings(user.id);
             setUserListings(listings);
         }
-    }, [user, isAuthenticated, router]);
+    }, [user, isAuthenticated, authLoading, router]);
+
 
     const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -242,8 +246,8 @@ export default function ProfilePage() {
                             <button
                                 onClick={() => setActiveTab('offered')}
                                 className={`flex-1 px-6 py-4 text-sm font-medium transition-colors ${activeTab === 'offered'
-                                        ? 'text-brand-blue border-b-2 border-brand-blue'
-                                        : 'text-gray-500 hover:text-gray-700'
+                                    ? 'text-brand-blue border-b-2 border-brand-blue'
+                                    : 'text-gray-500 hover:text-gray-700'
                                     }`}
                             >
                                 <div className="flex items-center justify-center gap-2">
@@ -254,8 +258,8 @@ export default function ProfilePage() {
                             <button
                                 onClick={() => setActiveTab('needed')}
                                 className={`flex-1 px-6 py-4 text-sm font-medium transition-colors ${activeTab === 'needed'
-                                        ? 'text-brand-blue border-b-2 border-brand-blue'
-                                        : 'text-gray-500 hover:text-gray-700'
+                                    ? 'text-brand-blue border-b-2 border-brand-blue'
+                                    : 'text-gray-500 hover:text-gray-700'
                                     }`}
                             >
                                 <div className="flex items-center justify-center gap-2">

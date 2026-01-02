@@ -11,12 +11,15 @@ import { Briefcase, MessageSquare, Star, TrendingUp, Package } from 'lucide-reac
 import Link from 'next/link';
 
 export default function DashboardPage() {
-    const { user, isAuthenticated } = useAuth();
+    const { user, isAuthenticated, loading: authLoading } = useAuth();
     const router = useRouter();
     const [deals, setDeals] = useState<Deal[]>([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        // Wait for auth to load before checking authentication
+        if (authLoading) return;
+
         if (!isAuthenticated) {
             router.push('/login');
             return;
@@ -27,7 +30,8 @@ export default function DashboardPage() {
             setDeals(userDeals);
         }
         setLoading(false);
-    }, [user, isAuthenticated, router]);
+    }, [user, isAuthenticated, authLoading, router]);
+
 
     if (!user) return null;
 
